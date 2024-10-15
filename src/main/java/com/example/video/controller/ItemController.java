@@ -1,6 +1,7 @@
 package com.example.video.controller;
 
 import com.example.video.dto.ItemDTO;
+import com.example.video.dto.request.RequestSaveItemDTO;
 import com.example.video.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +15,9 @@ public class ItemController
     private ItemService itemService;
 
     @PostMapping(path = "/save")
-    public String saveItem(@RequestBody ItemDTO itemDTO)
+    public String saveItem(@RequestBody RequestSaveItemDTO requestSaveItemDTO)
     {
-        itemService.addItem(itemDTO);
+        itemService.addItem(requestSaveItemDTO);
         return "saved";
     }
 }

@@ -1,7 +1,6 @@
 package com.example.video.dto;
 
 import com.example.video.entity.enums.MeasuringUnitType;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,7 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-
 public class ItemDTO
 {
     private int itemId;
@@ -17,5 +15,6 @@ public class ItemDTO
     private MeasuringUnitType measuringUnitType;
     private double balanceQty;
     private double sellingPrice;
+    private double supplierPrice;
     private boolean activeState;
 }

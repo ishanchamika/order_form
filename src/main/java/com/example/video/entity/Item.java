@@ -31,6 +31,9 @@ public class Item
     @Column(name = "selling_price", length = 50, nullable = false)
     private double sellingPrice;
 
+    @Column(name = "supplier_price", length = 50, nullable = false)
+    private double supplierPrice;
+
     @Column(name = "active_state", columnDefinition = "TINYINT default 1")
     private boolean activeState;
 }
