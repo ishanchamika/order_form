@@ -1,9 +1,11 @@
 package com.example.video.service.impl;
 
+import com.example.video.dto.ItemDTO;
 import com.example.video.dto.request.RequestSaveItemDTO;
 import com.example.video.entity.Item;
 import com.example.video.repo.ItemRepo;
 import com.example.video.service.ItemService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +15,17 @@ public class ItemServiceIMPL implements ItemService
   @Autowired
   private ItemRepo itemRepo;
 
-  @Override
-  public void addItem(RequestSaveItemDTO itemDTO)
-  {
-    Item item = new Item(
+  @Autowired
+  private ModelMapper modelMapper;
 
-    );
+  @Override
+  public void addItem(RequestSaveItemDTO requestSaveItemDTO)
+  {
+    Item item = modelMapper.map(requestSaveItemDTO, Item.class);
+    item.setActiveState(false);
+    if(!itemRepo.existsById(item.getItemId()))
+    {
+      itemRepo.save(item);
+    }
   }
 }

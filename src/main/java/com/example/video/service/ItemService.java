@@ -1,8 +1,8 @@
 package com.example.video.service;
 
-import com.example.video.dto.ItemDTO;
+import com.example.video.dto.request.RequestSaveItemDTO;
 
 public interface ItemService
 {
-    void addItem(ItemDTO itemDTO);
+    void addItem(RequestSaveItemDTO requestSaveItemDTO);
 }
