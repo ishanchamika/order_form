@@ -39,7 +39,7 @@ public class Customer
     {
     }
 
-//    all args Constructor
+    //all args Constructor
     public Customer(int customerId, String customerName, String customerAddress, int customerSalary, List<String> contactNumbers, String nic, boolean activeState)
     {
         this.customerId = customerId;
