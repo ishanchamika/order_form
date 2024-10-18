@@ -4,6 +4,7 @@ import com.example.video.dto.CustomerDTO;
 import com.example.video.entity.Customer;
 import com.example.video.repo.CustomerRepo;
 import com.example.video.service.CustomerService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,20 +12,25 @@ import org.springframework.stereotype.Service;
 public class CustomerServiceIMPL implements CustomerService
 {
     @Autowired
+    private ModelMapper modelMapper;
+
+    @Autowired
     private CustomerRepo customerRepo;
 
     @Override
     public void addCustomer(CustomerDTO customerDTO)
     {
-        Customer customer = new Customer(
-                customerDTO.getCustomerId(),
-                customerDTO.getCustomerName(),
-                customerDTO.getCustomerAddress(),
-                customerDTO.getCustomerSalary(),
-                customerDTO.getContactNumbers(),
-                customerDTO.getNic(),
-                customerDTO.isActiveState()
-        );
+//        Customer customer = new Customer(
+//                customerDTO.getCustomerId(),
+//                customerDTO.getCustomerName(),
+//                customerDTO.getCustomerAddress(),
+//                customerDTO.getCustomerSalary(),
+//                customerDTO.getContactNumbers(),
+//                customerDTO.getNic(),
+//                customerDTO.isActiveState()
+//        );
+
+        Customer customer = modelMapper.map(customerDTO, Customer.class);
 
         if(!customerRepo.existsById(customer.getCustomerId()))
         {
