@@ -6,6 +6,8 @@ import com.example.video.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/v1/item")
 @CrossOrigin
@@ -19,5 +21,12 @@ public class ItemController
     {
         itemService.addItem(requestSaveItemDTO);
         return "saved";
+    }
+
+    @GetMapping(path = "/get-by-name", params = "name")
+    public List<ItemDTO> getItemByName(@RequestParam(value = "name") String itemName)
+    {
+        List<ItemDTO> itemDTO = itemService.getItemByNameAndActiveState(itemName);
+        return itemDTO;
     }
 }
