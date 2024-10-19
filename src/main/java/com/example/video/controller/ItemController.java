@@ -3,7 +3,10 @@ package com.example.video.controller;
 import com.example.video.dto.ItemDTO;
 import com.example.video.dto.request.RequestSaveItemDTO;
 import com.example.video.service.ItemService;
+import com.example.video.util.StandardResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,10 +33,18 @@ public class ItemController
         return itemDTO;
     }
 
+//    @GetMapping(path = "/get-all-items")
+//    public List<ItemDTO> getAllItems()
+//    {
+//        List<ItemDTO> itemDTOS = itemService.getAllItems();
+//        return itemDTOS;
+//    }
+
     @GetMapping(path = "/get-all-items")
-    public List<ItemDTO> getAllItems()
+    public ResponseEntity<StandardResponse> getAllItems()
     {
         List<ItemDTO> itemDTOS = itemService.getAllItems();
-        return itemDTOS;
+        ResponseEntity<StandardResponse> m = new ResponseEntity<StandardResponse>(new StandardResponse(200, "SUCCESS",itemDTOS), HttpStatus.OK);
+        return m;
     }
 }
