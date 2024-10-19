@@ -28,7 +28,7 @@ public class ItemServiceIMPL implements ItemService
   @Override
   public void addItem(RequestSaveItemDTO requestSaveItemDTO)
   {
-//    Item item = modelMapper.map(requestSaveItemDTO, Item.class);
+    //Item item = modelMapper.map(requestSaveItemDTO, Item.class);
     Item item = itemMapper.requestDtoToEntity(requestSaveItemDTO);
     item.setActiveState(false);
     if(!itemRepo.existsById(item.getItemId()))
@@ -37,6 +37,7 @@ public class ItemServiceIMPL implements ItemService
     }
   }
 
+  @Override
   public List<ItemDTO> getItemByNameAndActiveState(String itemName)
   {
     if(itemName != null)
@@ -44,6 +45,22 @@ public class ItemServiceIMPL implements ItemService
       int b= 1;
       List<Item> items = itemRepo.findAllByItemName(itemName);
       List<ItemDTO> itemDTOList = itemMapper.entityListToDtoList(items);
+      return itemDTOList;
+    }
+    else
+    {
+      return null;
+    }
+  }
+
+  @Override
+  public List<ItemDTO> getAllItems()
+  {
+    List<Item> allItems = itemRepo.findAll();
+
+    if(!allItems.isEmpty())
+    {
+      List<ItemDTO> itemDTOList = itemMapper.entityListToDtoList(allItems);
       return itemDTOList;
     }
     else

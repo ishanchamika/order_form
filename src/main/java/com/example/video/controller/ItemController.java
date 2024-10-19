@@ -29,4 +29,11 @@ public class ItemController
         List<ItemDTO> itemDTO = itemService.getItemByNameAndActiveState(itemName);
         return itemDTO;
     }
+
+    @GetMapping(path = "/get-all-items")
+    public List<ItemDTO> getAllItems()
+    {
+        List<ItemDTO> itemDTOS = itemService.getAllItems();
+        return itemDTOS;
+    }
 }

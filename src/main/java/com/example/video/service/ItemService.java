@@ -10,4 +10,6 @@ public interface ItemService
     void addItem(RequestSaveItemDTO requestSaveItemDTO);
 
     List<ItemDTO> getItemByNameAndActiveState(String itemName);
+
+    List<ItemDTO> getAllItems();
 }
