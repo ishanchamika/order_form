@@ -3,6 +3,7 @@ package com.example.video.service.impl;
 import com.example.video.dto.ItemDTO;
 import com.example.video.dto.request.RequestSaveItemDTO;
 import com.example.video.entity.Item;
+import com.example.video.exception.NotFoundException;
 import com.example.video.repo.ItemRepo;
 import com.example.video.service.ItemService;
 import com.example.video.util.mappers.ItemMapper;
@@ -65,7 +66,7 @@ public class ItemServiceIMPL implements ItemService
     }
     else
     {
-      return null;
+      throw new NotFoundException("No data found");
     }
   }
 
