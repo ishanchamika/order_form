@@ -1,6 +1,7 @@
 package com.example.video.service.impl;
 
 import com.example.video.dto.ItemDTO;
+import com.example.video.dto.paginated.PaginatedResponseItemDTO;
 import com.example.video.dto.request.RequestSaveItemDTO;
 import com.example.video.entity.Item;
 import com.example.video.exception.NotFoundException;
@@ -9,6 +10,8 @@ import com.example.video.service.ItemService;
 import com.example.video.util.mappers.ItemMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -57,7 +60,7 @@ public class ItemServiceIMPL implements ItemService
   @Override
   public List<ItemDTO> getAllItems()
   {
-    List<Item> allItems = itemRepo.findAll();
+    List<Item> allItems = itemRepo.findAllByActiveStateIs(true);
 
     if(!allItems.isEmpty())
     {
@@ -70,4 +73,13 @@ public class ItemServiceIMPL implements ItemService
     }
   }
 
+  @Override
+  public PaginatedResponseItemDTO getAllItemsActive(int page, int size, boolean activeState)
+  {
+    Page<Item> items = itemRepo.findAllByActiveStateEquals(activeState, PageRequest.of(page, size));
+    List<ItemDTO> itemDTOS = itemMapper.pageToList(items);
+    int count = itemRepo.countAllByActiveStateEquals(activeState);
+    PaginatedResponseItemDTO paginatedResponseItemDTO = new PaginatedResponseItemDTO(itemDTOS, count);
+    return paginatedResponseItemDTO;
+  }
 }
